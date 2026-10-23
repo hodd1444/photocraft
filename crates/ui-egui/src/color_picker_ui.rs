@@ -900,7 +900,7 @@ mod tests {
         press(&mut h, at);
         let picked = color(&h);
         assert_ne!(picked, "#336699", "the press itself picks");
-        let hsv = rgb_to_hsv(parse_hex(&picked).unwrap());
+        let hsv = rgb_to_hsb(parse_hex(&picked).unwrap());
         assert!((hsv[1] - 0.5).abs() < 0.02 && (hsv[2] - 0.5).abs() < 0.02, "{picked} {hsv:?}");
         // A 3-point nudge (under the 6-point click threshold) moves the pick.
         h.event(egui::Event::PointerMoved(at + vec2(3.0, 0.0)));
@@ -917,7 +917,7 @@ mod tests {
         let before = color(&h);
         press(&mut h, o + vec2(FIELD + gap + 9.0, FIELD * 0.95));
         assert_ne!(color(&h), before, "the slider picks on press");
-        let hue = rgb_to_hsv(parse_hex(&color(&h)).unwrap())[0];
+        let hue = rgb_to_hsb(parse_hex(&color(&h)).unwrap())[0];
         assert!(hue < 30.0 || hue > 330.0, "hue {hue}");
     }
 
